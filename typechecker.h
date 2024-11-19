@@ -1,0 +1,9 @@
+#ifndef TYPECHECKER_H
+#define TYPECHECKER_H
+
+#ifndef IMP_TYPECHECKER
+#define IMP_TYPECHECKER
+
+#endif
+
+#endif //TYPECHECKER_H
