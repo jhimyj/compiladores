@@ -41,7 +41,9 @@ class Environment {
         }
         ribs.back()[var] = value;
     }
-    void add_var(string var) { ribs.back()[var] = 0; }
+    void add_var(string var) {
+        ribs.back()[var] = 0;
+    }
 
     bool remove_level() {
         if (ribs.size() > 0) {
@@ -74,6 +76,26 @@ class Environment {
         if (idx < 0)
             return false;
         v = ribs[idx][x];
+        return true;
+    }
+    T lookupFun(string x) {
+        T a;
+        const int idx = ribs.size() - 1;;
+        if (idx < 0 || ribs[0].find(x) == ribs[0].end())
+            return a;
+        return ribs[0][x];
+    }
+    bool lookupFun(string x, T& v) {
+        if (int idx = ribs.size() - 1; idx < 0 || ribs[0].find(x) == ribs[0].end())
+            return false;
+
+        v = ribs[0][x];
+        return true;
+    }
+    bool checkFun(string x) {
+        int idx = ribs.size() - 1;
+        if (idx < 0 || ribs[0].find(x) == ribs[0].end())
+            return false;
         return true;
     }
 };

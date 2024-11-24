@@ -12,14 +12,18 @@ using namespace std;
 
 class ImpType {
 public:
-  enum TType { NOTYPE=0, VOID, INT,LONGINT, BOOL, FUN };
-  static const char* type_names[6];
+  enum TType { NOTYPE=0, VOID, INT,LONGINT, BOOL, FUN , CONST};
+  static const char* type_names[7];
   TType ttype;
   vector<TType> types;
+  TType ctype;
   bool match(const ImpType&);
   bool set_basic_type(string s);
   bool set_basic_type(TType tt);
   bool set_fun_type(list<string> slist, string s);
+  bool set_const_type(string s);
+  bool set_const_type(TType tt);
+
 private:
   TType string_to_type(string s);
 };

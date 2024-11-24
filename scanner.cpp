@@ -98,9 +98,7 @@ Token* Scanner::nextToken() {
             current++;
         }
         token = new Token(Token::NUM, input, first, current - first);
-    }
-
-    else if (isalpha(c)) {
+    }else if (isalpha(c)) {
         current++;
         while (current < input.length() && isalnum(input[current]))
             current++;
@@ -165,7 +163,14 @@ Token* Scanner::nextToken() {
             token = new Token(Token::REPEAT, word,0,word.length());
         }else if (word=="until") {
             token = new Token(Token::UNTIL, word,0,word.length());
-        }else if(tolowerStringIsType(word)) {
+        }else if (word=="or") {
+            token = new Token(Token::OR, word,0,word.length());
+        }else if (word=="and") {
+            token = new Token(Token::AND, word,0,word.length());
+        }else if (word=="not") {
+            token = new Token(Token::NOT, word,0,word.length());
+        }
+        else if(tolowerStringIsType(word)) {
             token = new Token(Token::ID, word,0,word.length());
         }
         else {

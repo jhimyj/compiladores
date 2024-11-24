@@ -144,7 +144,18 @@ VarDecList::~VarDecList() {
 
 //::::::::::::::::::::::::SUBPROGRAMS
 
-SubProgram::SubProgram(string fname, list<string> types, list<list<string>> vars, string rtype,VarDecList* varls, Body* body):fname(fname),types(types),vars(vars),rtype(rtype),var_dec_list(varls),body(body){}
+SubProgram::SubProgram(string fname, list<string> typs, list<list<string>> l_vars, string rtype,VarDecList* varls, Body* body):fname(fname),rtype(rtype),var_dec_list(varls),body(body) {
+    list<list<string>>::iterator vrs;
+    list<string>::iterator type;
+    for (vrs = l_vars.begin(),type=typs.begin(); vrs != l_vars.end(),type != typs.end(); ++vrs,++type) {
+        list<string>::iterator var = vrs->begin();
+        while (var != vrs->end()) {
+            types.push_back(*type);
+            vars.push_back(*var);
+            ++var;
+        }
+    }
+}
 SubProgram::~SubProgram() {
     delete body;
 }

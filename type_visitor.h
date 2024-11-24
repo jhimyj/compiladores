@@ -1,11 +1,35 @@
-#ifndef IMP_VALUE_VISITOR
-#define IMP_VALUE_VISITOR
+#ifndef TYPE_VISITOR
+#define TYPE_VISITOR
 
 #include "exp.h"
-#include "imp_value.hh"
+#include "imp_type.hh"
+class NumberExp;
+class BoolExp;
+class UnaryExp;
+class BinaryExp;
+class IdentifierExp;
+class FCallExp;
+class AssignStatement;
+class PrintStatement;
+class IfStatement;
+class WhileStatement ;
+class ForStatement;
+class FCallStatement ;
+class RepeatStatement;
+class BlockStatement;
+class StatementList ;
+class Body;
+class ConstDec ;
+class ConstDecList;
+class TypeDec;
+class TypeDecList;
+class VarDec ;
+class VarDecList;
+class SubProgram;
+class SubProgramList;
+class Program;
 
-
-class ImpValueVisitor {
+class TypeVisitor {
 public:
     virtual void visit(AssignStatement* stm) = 0;
     virtual void visit(PrintStatement* stm) = 0;
@@ -26,12 +50,12 @@ public:
     virtual void visit(SubProgram* stm) =0;
     virtual void visit(SubProgramList* stm) =0;
     virtual void visit(Program* p) = 0;
-    virtual ImpValue visit(NumberExp* exp) = 0;
-    virtual ImpValue visit(BoolExp* exp) = 0;
-    virtual ImpValue visit(UnaryExp* exp) = 0;
-    virtual ImpValue visit(BinaryExp* exp) = 0;
-    virtual ImpValue visit(IdentifierExp* exp) = 0;
-    virtual ImpValue visit(FCallExp* exp) = 0;
+    virtual ImpType visit(NumberExp* exp) = 0;
+    virtual ImpType visit(BoolExp* exp) = 0;
+    virtual ImpType visit(UnaryExp* exp) = 0;
+    virtual ImpType visit(BinaryExp* exp) = 0;
+    virtual ImpType visit(IdentifierExp* exp) = 0;
+    virtual ImpType visit(FCallExp* exp) = 0;
 };
 
 

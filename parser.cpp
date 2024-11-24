@@ -227,6 +227,8 @@ Stm* Parser::parseStatement() {
         e = parseCExp();
         if (!match(Token::THEN)) {
             cout << "Error: se esperaba 'then' después de la expresión." << endl;
+            cout<<current<<endl;
+            cout<<current->text<<endl;
             exit(1);
         }
 
@@ -574,19 +576,25 @@ Program* Parser::parseProgram() {
         exit(1);
     }
     Program *p = new Program();
+    Section* s = NULL;
     while (check(Token::CONST) || check(Token::TYPE) || check(Token::VAR) || check(Token::FUNCTION)||check(Token::PROCEDURE)) {
         if (check(Token::CONST)) {
-            p->addSection( parseConstDecList());
+            s = parseConstDecList();
+            p->addSection(s);
+            p->consts.push_back(s);
         }
         else if (check(Token::TYPE)) {
             p->addSection(parseTypeDecList());
         }
         else if (check(Token::VAR)) {
-            p->addSection(parseVarDecList());
-
+            s = parseVarDecList();
+            p->addSection(s);
+            p->vars.push_back(s);
         }
         else if (check(Token::PROCEDURE)|| check(Token::FUNCTION)) {
-            p->addSection( parseSubProgDecList());
+            s = parseSubProgDecList();
+            p->addSection(s);
+            p->programs.push_back(s);
         }
     }
     p->addBody( parseBody());

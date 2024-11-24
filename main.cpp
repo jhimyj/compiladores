@@ -5,8 +5,9 @@
 #include "parser.h"
 #include "visitor.h"
 #include "imp_interpreter.hh"
+#include "imp_type_checker.h"
 #include "imp_type.hh"
-
+#include "imp_codegen.h"
 using namespace std;
 
 int main(int argc, const char* argv[]) {
@@ -37,6 +38,7 @@ int main(int argc, const char* argv[]) {
     cout << "Iniciando parsing:" << endl;
     Parser parser(&scanner);
     try {
+
         Program* program = parser.parseProgram();
         cout << "Parsing exitoso" << endl << endl;
         // cout << "Iniciando Visitor:" << endl;
@@ -49,6 +51,19 @@ int main(int argc, const char* argv[]) {
         // cout << endl << "Run program:" << endl;
         // interpreter.interpret(program);
         // cout << "End of program execution" << endl;
+        ImpTypeChecker typeChecker;
+
+
+
+        cout << "TypeChecker:" << endl;
+        typeChecker.typecheck(program);
+        cout << "TypeChecker exitoso" << endl;
+
+        ImpCodeGen* codegen = new ImpCodeGen(&typeChecker);
+        cout << endl << "Generar codigo:" << endl;
+        string filename =  argv[1];
+        codegen->codegen(program, filename + ".sm");
+        cout << "End of program execution" << endl;
         delete program;
     } catch (const exception& e) {
         cout << "Error durante la ejecución: " << e.what() << endl;
