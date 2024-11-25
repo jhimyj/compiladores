@@ -125,7 +125,13 @@ void ImpTypeChecker::visit(Program* p) {
   for (it = p->sections.begin(); it != p->sections.end(); it++) {
     (*it)->accept(this);
   }
+  //para el body
+  sp = max_sp = 0;
+  dir = max_dir = 0;
   p->body->accept(this);
+  fentrybody.max_stack = max_sp;
+  fentrybody.mem_locals = max_dir;
+  //:::::::::::
   add_contsdec(p->consts);
   tipos.remove_level();
   env.remove_level();

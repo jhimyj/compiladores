@@ -18,6 +18,7 @@ public:
     ImpTypeChecker();
     Environment<FEntry> ftable;
     FEntry fentryConst;
+    FEntry fentrybody;
 private:
     Environment<string> tipos;
     Environment<ImpType> env;

@@ -89,6 +89,8 @@ void ImpCodeGen::visit(Program* p) {
     (*it1)->accept(this);
   }
   codegen(get_flabel("main"),"skip");
+  codegen(nolabel,"enter",analysis->fentrybody.max_stack+analysis->fentrybody.mem_locals);
+  codegen(nolabel,"alloc",analysis->fentrybody.mem_locals);
   p->body->accept(this);
   codegen(nolabel,"return",3);
   direcciones.remove_level();
